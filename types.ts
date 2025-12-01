@@ -10,6 +10,7 @@ export interface Unit {
   lng: number;
   address: string;
   status: 'moving' | 'stopped' | 'offline';
+  lastGPSTimestamp: string;
 }
 
 export interface AnalysisResult {

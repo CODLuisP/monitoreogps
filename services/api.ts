@@ -71,7 +71,8 @@ export const fetchUnitsByRoute = async (route: RouteName): Promise<{ units: Unit
       lat: device.lastValidLatitude,
       lng: device.lastValidLongitude,
       address: device.direccion || 'Sin dirección',
-      status: (device.lastValidSpeed > 0 ? 'moving' : 'stopped') as 'moving' | 'stopped' | 'offline'
+      status: (device.lastValidSpeed > 0 ? 'moving' : 'stopped') as 'moving' | 'stopped' | 'offline',
+      lastGPSTimestamp: device.lastGPSTimestamp
     }));
 
     return { units, timestamp: rawData.fechaActual };

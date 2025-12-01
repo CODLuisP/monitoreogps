@@ -54,6 +54,17 @@ const AIStatus: React.FC<AIStatusProps> = ({ units, routeName }) => {
       alerts.push('⚠️ CRÍTICO: Ninguna unidad en movimiento actualmente');
     }
 
+    // Detectar unidades "quedadas" (sin reporte por más de 3 horas)
+    const threeHoursAgo = Date.now() / 1000 - (3 * 60 * 60);
+    const stuckUnits = units.filter(u => {
+      const timestamp = parseInt(u.lastGPSTimestamp);
+      return !isNaN(timestamp) && timestamp < threeHoursAgo;
+    });
+
+    if (stuckUnits.length > 0) {
+      alerts.push(`⚠️ UNIDADES QUEDADAS (>3h sin reporte): ${stuckUnits.map(u => u.plate).join(', ')}`);
+    }
+
     return { summary, alerts };
   };
 
