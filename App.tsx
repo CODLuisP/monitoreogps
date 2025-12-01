@@ -57,17 +57,17 @@ const App: React.FC = () => {
       <div className="fixed top-0 left-0 w-full h-96 bg-gradient-to-b from-brand-900/20 to-transparent pointer-events-none -z-10" />
       <div className="fixed top-[-10%] right-[-5%] w-96 h-96 bg-blue-900/20 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      <main className="container mx-auto px-4 py-8 max-w-7xl">
+      <main className="container mx-auto px-4 py-8">
         
         {/* Header Section */}
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 border-b border-slate-800 pb-8">
-          <div>
+          <div className="w-[80%]">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-brand-600 rounded-lg shadow-lg shadow-brand-900/50">
                 <Satellite className="text-white" size={24} />
               </div>
               <h1 className="text-3xl font-black text-white tracking-tight">
-                MONITOREO <span className="text-brand-500">VILLA</span>
+                MONITOREO <span className="text-brand-500">VELSAT</span>
               </h1>
             </div>
             <p className="text-slate-400 flex items-center gap-2">
@@ -76,7 +76,7 @@ const App: React.FC = () => {
             </p>
           </div>
           
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col items-end gap-2b">
             <AIStatus units={filteredUnits} routeName={selectedRoute} />
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <span>Actualizado: {lastUpdated.toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit', second: '2-digit' })}</span>

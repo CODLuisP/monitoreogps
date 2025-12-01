@@ -43,7 +43,7 @@ const RouteSelector: React.FC<RouteSelectorProps> = ({ selectedRoute, onSelectRo
               </div>
 
               <div className={`
-                flex items-center justify-center w-10 h-10 rounded-full z-10 transition-colors
+                absolute top-8 right-2 flex items-center justify-center  w-10 h-10 rounded-full z-10 transition-colors
                 ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-900/50 text-slate-500'}
               `}>
                 <Bus size={20} />

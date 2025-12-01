@@ -51,7 +51,7 @@ const AIStatus: React.FC<AIStatusProps> = ({ units, routeName }) => {
     });
 
     if (activeUnits.length === 0 && totalUnits > 0) {
-      alerts.push('⚠️ CRÍTICO: Ninguna unidad en movimiento actualmente');
+      alerts.push('CRÍTICO: Ninguna unidad en movimiento actualmente');
     }
 
     // Detectar unidades "quedadas" (sin reporte por más de 3 horas)
@@ -62,7 +62,7 @@ const AIStatus: React.FC<AIStatusProps> = ({ units, routeName }) => {
     });
 
     if (stuckUnits.length > 0) {
-      alerts.push(`⚠️ UNIDADES QUEDADAS (>3h sin reporte): ${stuckUnits.map(u => u.plate).join(', ')}`);
+      alerts.push(`UNIDADES QUEDADAS (>3h sin reporte): ${stuckUnits.map(u => u.plate).join(', ')}`);
     }
 
     return { summary, alerts };
@@ -85,21 +85,21 @@ const AIStatus: React.FC<AIStatusProps> = ({ units, routeName }) => {
     return (
       <button 
         onClick={handleAnalyze}
-        className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-2 rounded-full shadow-lg shadow-purple-900/50 transition-all transform hover:scale-105 font-medium text-sm"
+        className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-2 rounded-full text-center justify-center shadow-lg shadow-purple-900/50 transition-all transform hover:scale-105 font-medium text-sm w-[350px] mb-2"
       >
         <Sparkles size={16} />
-        <span>Analizar con IA</span>
+        <span>Analizar unidades sin reportar (+3h)</span>
       </button>
     );
   }
 
   return (
-    <div className="relative w-full md:w-auto">
+<div className="relative w-[100%]">
       <div className="bg-slate-800 border border-slate-600 rounded-xl p-4 shadow-2xl md:min-w-[350px] animate-in fade-in zoom-in duration-200">
         <div className="flex justify-between items-start mb-3">
           <div className="flex items-center gap-2 text-purple-400">
             <Bot size={20} />
-            <h3 className="font-bold text-white">Análisis de Flota IA</h3>
+            <h3 className="font-bold text-white">Análisis de Unidades</h3>
           </div>
           <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white">
             <X size={16} />
