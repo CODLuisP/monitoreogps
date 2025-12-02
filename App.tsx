@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { ROUTES } from './constants';
 import { RouteName, Unit } from './types';
 import UnitTable from './components/UnitTable';
+import RecordCountTable from './components/RecordCountTable';
 import RouteSelector from './components/RouteSelector';
 import AIStatus from './components/AIStatus';
 import { LayoutDashboard, Satellite, RefreshCw } from 'lucide-react';
@@ -119,6 +120,11 @@ const App: React.FC = () => {
           ) : (
             <UnitTable units={filteredUnits} />
           )}
+        </section>
+
+        {/* Record Counts Table */}
+        <section className="animate-in slide-in-from-bottom-8 duration-700 delay-200 mt-8">
+          <RecordCountTable />
         </section>
 
       </main>

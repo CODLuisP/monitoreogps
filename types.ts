@@ -17,3 +17,9 @@ export interface AnalysisResult {
   summary: string;
   alerts: string[];
 }
+
+export interface RecordCount {
+  accountID: string;
+  deviceID: string;
+  cantidad: string;
+}
