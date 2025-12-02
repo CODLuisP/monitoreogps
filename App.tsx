@@ -5,7 +5,7 @@ import UnitTable from './components/UnitTable';
 import RecordCountTable from './components/RecordCountTable';
 import RouteSelector from './components/RouteSelector';
 import AIStatus from './components/AIStatus';
-import { LayoutDashboard, Satellite, RefreshCw } from 'lucide-react';
+import { LayoutDashboard, Satellite, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
 import { fetchAllUnits } from './services/api';
 
 const App: React.FC = () => {
@@ -14,6 +14,10 @@ const App: React.FC = () => {
   const [units, setUnits] = useState<Unit[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
+  
+  // Collapsible state
+  const [showUnitTable, setShowUnitTable] = useState<boolean>(true);
+  const [showRecordTable, setShowRecordTable] = useState<boolean>(false);
 
   // Fetch data function
   const loadData = async () => {
@@ -101,31 +105,56 @@ const App: React.FC = () => {
           />
         </section>
 
-        {/* Status Bar / Filter Info */}
-        <div className="flex items-center justify-between mb-4 px-1">
-          <h3 className="text-lg font-semibold text-white">
-            {selectedRoute ? `Unidades de ${selectedRoute}` : 'Todas las Unidades'}
-          </h3>
-          <span className="text-xs font-mono text-slate-500 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
-            {filteredUnits.length} Resultados
-          </span>
+        {/* Unit Table Section */}
+        <div className="mb-6">
+          <button 
+            onClick={() => setShowUnitTable(!showUnitTable)}
+            className="w-full flex items-center justify-between mb-4 px-4 py-3 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition-colors border border-slate-700/50"
+          >
+            <div className="flex items-center gap-3">
+              {showUnitTable ? <ChevronUp size={20} className="text-brand-500" /> : <ChevronDown size={20} className="text-slate-400" />}
+              <h3 className="text-lg font-semibold text-white">
+                {selectedRoute ? `Unidades de ${selectedRoute}` : 'Todas las Unidades'}
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500 bg-slate-900 px-3 py-1 rounded-full border border-slate-700">
+              {filteredUnits.length} Resultados
+            </span>
+          </button>
+
+          {showUnitTable && (
+            <section className="animate-in slide-in-from-bottom-4 duration-500">
+              {loading && units.length === 0 ? (
+                <div className="flex justify-center py-20">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500"></div>
+                </div>
+              ) : (
+                <UnitTable units={filteredUnits} />
+              )}
+            </section>
+          )}
         </div>
 
-        {/* Data Table */}
-        <section className="animate-in slide-in-from-bottom-8 duration-700 delay-100">
-          {loading && units.length === 0 ? (
-            <div className="flex justify-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500"></div>
+        {/* Record Counts Table Section */}
+        <div className="mb-8">
+          <button 
+            onClick={() => setShowRecordTable(!showRecordTable)}
+            className="w-full flex items-center justify-between mb-4 px-4 py-3 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition-colors border border-slate-700/50"
+          >
+            <div className="flex items-center gap-3">
+              {showRecordTable ? <ChevronUp size={20} className="text-blue-500" /> : <ChevronDown size={20} className="text-slate-400" />}
+              <h3 className="text-lg font-semibold text-white">
+                Registros por Hora
+              </h3>
             </div>
-          ) : (
-            <UnitTable units={filteredUnits} />
-          )}
-        </section>
+          </button>
 
-        {/* Record Counts Table */}
-        <section className="animate-in slide-in-from-bottom-8 duration-700 delay-200 mt-8">
-          <RecordCountTable />
-        </section>
+          {showRecordTable && (
+            <section className="animate-in slide-in-from-bottom-4 duration-500">
+              <RecordCountTable />
+            </section>
+          )}
+        </div>
 
       </main>
     </div>
